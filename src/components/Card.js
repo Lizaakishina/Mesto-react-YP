@@ -4,7 +4,7 @@ const Card = ({card, onCardClick}) => {
   };
   return (
     <article className="card">
-      <button className="card__button-remove" type="button" aria-label="Удалить"></button>
+      <button className="card__button-delete" type="button" aria-label="Удалить"></button>
       <img src={card.link} onClick={handleImageClick} className="card__image" alt="Фото"/>
       <div className="card__info">
         <h2 className="card__name">{card.name}</h2>

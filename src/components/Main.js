@@ -28,11 +28,11 @@ const Main = (props) => {
         <div className="profile__info">
           <div className="profile__container-name">
             <h1 className="profile__name">{userName}</h1>
-            <button className="profile__button-edit" type="button" onClick={props.onEditProfile} aria-label="Редактировать"></button>
+            <button className="profile__edit" type="button" onClick={props.onEditProfile} aria-label="Редактировать"></button>
           </div>
           <p className="profile__job">{userDescription}</p>
         </div>
-        <button className="profile__button-add" type="button" onClick={props.onAddPlace} aria-label="Добавить"></button>
+        <button className="profile__add" type="button" onClick={props.onAddPlace} aria-label="Добавить"></button>
       </section>
       <section className="cards" aria-label="Фотокарточки">
         {cards.map(card =>

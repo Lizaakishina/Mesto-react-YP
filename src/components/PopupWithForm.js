@@ -1,5 +1,4 @@
 const PopupWithForm = ({name, title, isOpen, onClose, onSubmit, children}) => {
-
   const classPopupOpened = `${isOpen ? 'popup_opened' : ''}`;
 
   return (
@@ -13,7 +12,7 @@ const PopupWithForm = ({name, title, isOpen, onClose, onSubmit, children}) => {
         </form>
       </div>
     </div>
-  );
+  )
 }
 
-export default PopupWithForm;
+export default PopupWithForm

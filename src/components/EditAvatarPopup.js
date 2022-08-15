@@ -28,7 +28,7 @@ const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
       <span className='popup__input-error popup__input-error_type_avatar'></span>
       </>
     </PopupWithForm>
-  );
+  )
 }
 
-export default EditAvatarPopup;
+export default EditAvatarPopup

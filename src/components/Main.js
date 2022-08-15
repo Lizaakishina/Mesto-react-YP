@@ -28,7 +28,7 @@ const Main = (props) => {
         )}
       </section>
     </main>
-  );
+  )
 }
 
 export default Main

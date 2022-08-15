@@ -4,7 +4,7 @@ export const formSelectors = {
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
   inputTextErrorSelector: '.popup__input-error'
-};
+}
   
 export const apiConfig = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-45',

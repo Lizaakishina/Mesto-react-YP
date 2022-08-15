@@ -24,7 +24,7 @@ const App = () => {
         setCurrentUser(res);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [])
 
   useEffect(() => {
     api.getInitialCards()
@@ -32,7 +32,7 @@ const App = () => {
         setCards(dataCards);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [])
 
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
@@ -59,7 +59,7 @@ const App = () => {
         setCards(cards.map(item => item._id === card._id ? newCard : item));
       })
       .catch(err => console.log(err));
-  };
+  }
 
   const handleCardDelete = (card) => {
     api.removeCard(card._id)
@@ -67,7 +67,7 @@ const App = () => {
         setCards(cards.filter(item => item._id !== card._id));
       })
       .catch(err => console.log(err));
-  };
+  }
 
   const handleUpdateUser = ({name, about}) => {
     api.setUserInfo({name, about})
@@ -108,7 +108,6 @@ const App = () => {
           onCardDelete={handleCardDelete}
         />
       <Footer/>
-
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onUpdateAvatar={handleUpdateAvatar}
         onClose={closeAllPopups}/>
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser}
@@ -147,7 +146,7 @@ const App = () => {
       />
       </CurrentUserContext.Provider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

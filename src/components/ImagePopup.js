@@ -9,7 +9,7 @@ const ImagePopup = ({card, isOpen, onClose}) => {
         <h3 className="popup__description">{card.name}</h3>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ImagePopup;
+export default ImagePopup

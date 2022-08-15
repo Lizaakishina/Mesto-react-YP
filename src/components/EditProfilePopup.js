@@ -9,11 +9,11 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser}) => {
 
   const handleChangeName = (evt) => {
     setName(evt.target.value);
-  };
+  }
 
   const handleChangeDescription = (evt) => {
     setDescription(evt.target.value);
-  };
+  }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -21,13 +21,13 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser}) => {
     onUpdateUser({
       name,
       about: description
-    });
-  };
+    })
+  }
 
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser])
 
   return (
     <PopupWithForm title='Редактировать профиль' name='edit-profile'
@@ -45,7 +45,7 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser}) => {
       <span className='popup__input-error popup__input-error_type_user-job'></span>
       </>
     </PopupWithForm>
-  );
+  )
 }
 
-export default EditProfilePopup;
+export default EditProfilePopup

@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 const App = () => {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -19,16 +19,9 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({name: 'user', about: 'about', avatar: ''});
 
   useEffect(() => {
-    api.getUser()
-      .then(res => {
-        setCurrentUser(res);
-      })
-      .catch((err) => console.log(err));
-  }, [])
-
-  useEffect(() => {
-    api.getInitialCards()
-      .then((dataCards) => {
+    Promise.all([api.getUser(), api.getInitialCards()])
+      .then(([user, dataCards]) => {
+        setCurrentUser(user);
         setCards(dataCards);
       })
       .catch(err => console.log(err));
@@ -65,6 +58,15 @@ const App = () => {
     api.removeCard(card._id)
       .then(() => {
         setCards(cards.filter(item => item._id !== card._id));
+      })
+      .catch(err => console.log(err));
+  }
+
+  const handleAddPlace = ({name, link}) => {
+    api.createCard({name, link})
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
       })
       .catch(err => console.log(err));
   }
@@ -112,37 +114,10 @@ const App = () => {
         onClose={closeAllPopups}/>
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser}
         onClose={closeAllPopups}/>
-      <PopupWithForm
-        title='Новое место'
-        name='add-card'
-        isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}
-      >
-        <input
-          type="text"
-          id="gallery-name"
-          placeholder="Название"
-          name="description"
-          className="popup__input popup__input_gallery"
-          required
-          minLength="2"
-          maxLength="30"
-        />
-        <span className="popup__input-error gallery-name-error"></span>
-        <input
-          type="url"
-          id="gallery-link"
-          placeholder="Ссылка на картинку"
-          name="link"
-          className="popup__input popup__input_link"
-          required
-        />
-        <span className="popup__input-error gallery-link-error"></span>
-      </PopupWithForm>
+      <AddPlacePopup isOpen={isAddPlacePopupOpen} onAddPlace={handleAddPlace}
+        onClose={closeAllPopups}/>
       <ImagePopup
-        card={selectedCard}
-        isOpen={isImagePopupOpen}
-        onClose={closeAllPopups}
+        card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups}
       />
       </CurrentUserContext.Provider>
     </div>

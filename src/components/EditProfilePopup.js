@@ -1,33 +1,36 @@
 import PopupWithForm from "./PopupWithForm";
 import { useState, useEffect, useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import useInput from '../utils/hooks/useInput';
 
 const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState(currentUser.name);
-  const [description, setDescription] = useState(currentUser.about);
+  const inputName = useInput({inputValue: currentUser.name});
+  const inputAbout = useInput({inputValue: currentUser.about});
 
-  const handleChangeName = (evt) => {
+  /*const handleChangeName = (evt) => {
     setName(evt.target.value);
   };
 
   const handleChangeDescription = (evt) => {
     setDescription(evt.target.value);
-  };
+  };*/
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
     onUpdateUser({
-      name,
-      about: description,
+      name: inputName.value,
+      about: inputAbout.value
     });
   };
 
   useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser]);
+    inputName.reset();
+    inputAbout.reset();
+    inputName.setValue(currentUser.name);
+    inputAbout.setValue(currentUser.about);
+  }, [currentUser, isOpen]);
 
   return (
     <PopupWithForm
@@ -39,8 +42,8 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
     >
       <input
         className="popup__input popup__input_type_user-name"
-        value={name}
-        onChange={handleChangeName}
+        value={inputName.value}
+        onChange={inputName.onChange}
         type="text"
         name="name"
         id="user-name"
@@ -52,8 +55,8 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
       <span className="popup__input-error popup__input-error_type_user-name"></span>
       <input
         className="popup__input popup__input_type_user-job"
-        value={description}
-        onChange={handleChangeDescription}
+        value={inputAbout.value}
+        onChange={inputAbout.onChange}
         type="text"
         name="job"
         id="user-job"

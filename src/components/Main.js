@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 const Main = (props) => {
   const currentUser = useContext(CurrentUserContext);
-
+  
   return (
     <main className="content">
       <section className="profile" aria-label="Профиль пользователя">
@@ -22,9 +22,13 @@ const Main = (props) => {
       </section>
       <section className="cards" aria-label="Фотокарточки">
         {props.cards.map(card =>
-          <Card card={card} key={card._id}
-          onCardClick={props.onCardClick} onCardDelete={props.onCardDelete}
-          onCardLike={props.onCardLike}/>
+          <Card
+            card={card}
+            key={card._id}
+            onCardClick={props.onCardClick}
+            onCardDelete={props.onCardDelete}
+            onCardLike={props.onCardLike}
+          />
         )}
       </section>
     </main>

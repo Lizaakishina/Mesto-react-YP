@@ -10,7 +10,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
 const App = () => {
-  const [isOpened, setIsOpened] = useState(false);
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
@@ -36,7 +36,7 @@ const App = () => {
   };
 
   const handleEditProfileClick = () => {
-    setIsOpened(true);
+    setEditProfilePopupOpen(true);
   };
 
   const handleAddPlaceClick = () => {
@@ -100,7 +100,7 @@ const App = () => {
 
   const closeAllPopups = () => {
     setEditAvatarPopupOpen(false);
-    setIsOpened(false);
+    setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setImagePopupOpen(false);
   };
@@ -125,7 +125,7 @@ const App = () => {
           onClose={closeAllPopups}
         />
         <EditProfilePopup
-          isOpen={isOpened}
+          isOpen={isEditProfilePopupOpen}
           onUpdateUser={handleUpdateUser}
           onClose={closeAllPopups}
         />

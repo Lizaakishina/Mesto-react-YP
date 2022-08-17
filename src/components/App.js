@@ -54,7 +54,7 @@ const App = () => {
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards(cards.map((item) => (item._id === card._id ? newCard : item)));
+        setCards((cards) => cards.map((item) => (item._id === card._id ? newCard : item)))
       })
       .catch((err) => console.log(err));
   };
@@ -63,7 +63,7 @@ const App = () => {
     api
       .removeCard(card._id)
       .then(() => {
-        setCards(cards.filter((item) => item._id !== card._id));
+        setCards((cards) => cards.filter((item) => item._id !== card._id))
       })
       .catch((err) => console.log(err));
   };
